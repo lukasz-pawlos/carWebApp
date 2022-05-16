@@ -2,7 +2,6 @@
   <TopBar/>
   <div class="container">
     <Menu/>
-    <deleteForm/>
   </div>
 </template>
 

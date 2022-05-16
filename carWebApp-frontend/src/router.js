@@ -3,6 +3,8 @@ import MainPage from "@/components/MainPage";
 import CarPage from "@/components/CarPage";
 import CreateAdvert from "@/components/CreateAdvert";
 import AdvertPage from "@/components/AdvertPage";
+import ConfirmationPage from "@/components/ConfirmationPage";
+import EditAdvert from "@/components/EditAdvert";
 const routes = [
     {
         path: "/",
@@ -19,6 +21,14 @@ const routes = [
     {
         path: "/advert",
         component: AdvertPage,
+    },
+    {
+        path: "/confirmation",
+        component: ConfirmationPage,
+    },
+    {
+        path: "/editAdvert",
+        component: EditAdvert,
     },
 
 ];

@@ -10,8 +10,8 @@
       </div>
       <div class="text">
         <h1>{{ advert.title }}</h1>
-        <h2>{{  advert.brandName  }}CAR BRAND</h2>
-        <h2>{{  advert.modelName  }}CAR MODEL</h2>
+        <h2>{{  advert.brandName  }}</h2>
+        <h2>{{  advert.modelName  }}</h2>
 
         <span>{{advert.description}}</span>
 
@@ -20,20 +20,28 @@
       <div class="tableDiv">
         <table>
           <tr>
+            <td>COUNTRY</td>
+            <td>{{  advert.country  }}1111</td>
+          </tr>
+          <tr>
             <td>COLOR</td>
-            <td>{{  advert.color  }}</td>
+            <td>{{  advert.color  }}1111</td>
+          </tr>
+          <tr>
+            <td>CAR BODY</td>
+            <td>{{  advert.carBody  }}1111</td>
           </tr>
           <tr>
             <td>VINTAGE</td>
-            <td>{{ advert.vintage }}</td>
+            <td>{{ advert.vintage }}1111</td>
           </tr>
           <tr>
             <td>MILEAGE</td>
-            <td>{{ advert.mileage }}</td>
+            <td>{{ advert.mileage }}1111</td>
           </tr>
           <tr>
             <td>POWER</td>
-            <td>{{ advert.power }}</td>
+            <td>{{ advert.power }}1111</td>
           </tr>
           <tr>
             <td>FUEL</td>
@@ -54,10 +62,10 @@
         <button>
           Buy this car
         </button>
-        <button>
+        <button @click="$router.push('./editAdvert')">
           Edit this advert
         </button>
-        <button>
+        <button @click="$router.push('./confirmation')">
           Delete this advert
         </button>
       </selection>
@@ -104,6 +112,10 @@ export default {
   flex-wrap: nowrap;
 }
 
+table td{
+  padding: 10px 30px 10px 30px;
+}
+
 @media only screen and (min-width: 1300px) {
   .advert{
     display: flex;
@@ -132,6 +144,7 @@ export default {
 
 .text{
   padding: 15px;
+  min-width: 660px;
 }
 .tableDiv{
   display: flex;

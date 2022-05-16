@@ -1,22 +1,14 @@
 <template>
   <div class="formDiv">
-    <h1> Sell your car </h1>
+    <h1> Edit your advert </h1>
 
     <Form @submit="handleForm" :validation-schema="schema">
-      <Field name="brandName" class="formField"  as="select" @click="setBrand($event)">
-        <option v-for="(BRAND) in brands " :key="BRAND"
-                value='BRAND.brandName'>{{ BRAND.brandName }}</option>
-      </Field>
-      <label>Car brand</label>
-      <ErrorMessage name="carBrand" class="errorMessage"/>
-
-      <Field name="modelName" class="formField" as="select" @click="setModel($event)">
-        <option v-for="(MODEL) in models " :key="MODEL"
-                value="MODEL.modelName">{{ MODEL.modelName }}</option>
-      </Field>
-      <label>Car model</label>
-      <ErrorMessage name="carModel" class="errorMessage"/>
-
+      <Field
+          class="formField"
+          type="text"
+          name="secretKey"/>
+      <label>Secret key</label>
+      <ErrorMessage name="secretKey" class="errorMessage"/>
 
       <Field
           class="formField"
@@ -60,7 +52,7 @@
           class="formField"
           type="text"
           name="title">
-        </Field>
+      </Field>
       <label>Title</label>
       <ErrorMessage name="title" class="errorMessage"/>
 
@@ -108,24 +100,24 @@
 </template>
 
 <script>
-
 import {Form, Field, ErrorMessage} from "vee-validate";
 import * as yup from "yup";
-import router from "@/router";
 import axios from "axios";
+import router from "@/router";
 export default {
-  name: "SalesForm",
+  name: "EditForm",
   components: {
     Form,
     Field,
     ErrorMessage,
   },
+
   data: function () {
     const schema = yup.object().shape({
       // .required("Car brand is required!"),
-      modelName: yup
-          .string(),
-      // .required("Car model is required!"),
+      secretKey: yup
+          .string()
+          .required("Secret key is required!"),
       vintage: yup
           .number()
           .required("Vintage is required!")
@@ -188,13 +180,12 @@ export default {
       advert.power = Number(advert.power);
       advert.price = Number(advert.price);
 
-      axios.post('http://localhost:8080/api/adverts',{
+      axios.put('http://localhost:8080/api/adverts' + advert.secretKey,{
         color: advert.color,
         vintage: advert.vintage,
         mileage: advert.mileage,
         power: advert.power,
         fuel: advert.fuel,
-        modelName: this.selectedModel,
         description: advert.description,
         title: advert.title,
         price: advert.price,
@@ -220,7 +211,6 @@ export default {
       this.selectedModel = event.target.options[event.target.options.selectedIndex].text;
     }
   },
-
 }
 </script>
 

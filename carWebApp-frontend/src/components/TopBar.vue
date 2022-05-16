@@ -10,13 +10,23 @@
       <span>
         Service
       </span>
+      <span>
+        <font-awesome-icon icon="car"/>
+      </span>
     </h1>
   </div>
 </template>
 
 <script>
+import {library} from "@fortawesome/fontawesome-svg-core";
 export default {
-  name: "TopBar"
+  name: "TopBar",
+
+  data() {
+    return{
+      lib: library,
+    }
+  }
 }
 </script>
 

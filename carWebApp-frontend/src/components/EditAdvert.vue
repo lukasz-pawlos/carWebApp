@@ -2,25 +2,20 @@
   <TopBar/>
   <div class="container">
     <Menu/>
-    <SortForm/>
-    <Cars/>
+    <EditForm/>
   </div>
 </template>
 
-
-
 <script>
 import TopBar from "@/components/TopBar";
+import EditForm from "@/components/EditForm";
 import Menu from "@/components/Menu";
-import Cars from "@/components/Cars";
-import SortForm from "@/components/SortForm";
 export default {
-  name: "CarPage",
-  components: {
-    Cars,
+  name: "EditAdvert",
+  components:{
     Menu,
     TopBar,
-    SortForm
+    EditForm
   }
 }
 </script>
