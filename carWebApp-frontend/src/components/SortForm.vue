@@ -6,21 +6,31 @@
       <div class="formSort">
         <section class="sortOption">
         <Field
-            name="brandName"
-            class="formField"/>
+            name="brand_name"
+            class="formFieldSelect"
+            as="select"
+            @click="setBrand($event)">
+          <option v-for="(BRAND) in brands " :key="BRAND"
+                  value='BRAND.brandName'>{{ BRAND.brandName }}</option>
+        </Field>
         <label>Car brand</label>
         </section>
 
         <section class="sortOption">
         <Field
-            name="modelName"
-               class="formField"/>
+            name="model_name"
+            class="formFieldSelect"
+            as="select"
+            @click="setModel($event)">
+          <option v-for="(MODEL) in models " :key="MODEL"
+                  value="MODEL.modelName">{{ MODEL.modelName }}</option>
+        </Field>
           <label>Car model</label>
         </section>
 
         <section class="sortOption">
           <Field
-              name="carBody"
+              name="car_body"
               class="formField"/>
           <label>Car body</label>
         </section>
@@ -112,12 +122,99 @@
 
 <script>
 import {Form, Field} from "vee-validate";
+import * as yup from "yup";
+import axios from "axios";
 export default {
   name: "SortForm",
-  components:{
+  components: {
     Form,
     Field,
   },
+  data: function () {
+    const schema = yup.object().shape({
+      // .required("Car brand is required!"),
+      brand_name: yup
+          .string(),
+      mode_name: yup
+          .string(),
+      car_body: yup
+          .string(),
+      price_min: yup
+          .number()
+          .lessThan(10000000)
+          .required("Price is required!")
+          .positive(),
+      price_max: yup
+          .number()
+          .lessThan(10000000)
+          .required("Price is required!")
+          .positive(),
+      vintage_min: yup
+          .number()
+          .moreThan(1900)
+          .lessThan(2022),
+      vintage_max: yup
+          .number()
+          .moreThan(1900)
+          .lessThan(2022),
+      mileage_min: yup
+          .number()
+          .positive(),
+      mileage_max: yup
+          .number()
+          .positive(),
+      power_min: yup.number()
+          .positive(),
+      power_max: yup.number()
+          .positive(),
+      fuel: yup
+          .string(),
+    });
+    return {
+      schema,
+      selectedBrand: '',
+      selectedModel: '',
+      brands: [],
+      models: [],
+    };
+  },
+
+  methods: {
+    handleForm(advert){
+      advert.vintage_min = Number(advert.vintage_min);
+      advert.vintage_max = Number(advert.vintage_max);
+      advert.mileage_min = Number(advert.mileage_min);
+      advert.mileage_max = Number(advert.mileage_max);
+      advert.power_min = Number(advert.power_min);
+      advert.power_max = Number(advert.power_max);
+      advert.price_min = Number(advert.price_min);
+      advert.price_max = Number(advert.price_max);
+
+      let URL = `http://localhost:8080/api/adverts?brand_name=
+      ${advert.brand_name}$model_name=${advert.mode_name}&car_body=${advert.car_body}&price_min=${advert.price_min}
+      &price_max=${advert.price_max}&vintage_min=${advert.vintage_min}&vintage_max=${advert.vintage_max}
+      &mileage_min=${advert.mileage_min}&mileage_max=${advert.mileage_max}&power_min=${advert.power_min}
+      &power_max=${advert.power_max}&fuel=${advert.fuel}`;
+      console.log("dupsko");
+      console.log(URL);
+    },
+
+    getBrands() {
+      axios.get('http://localhost:8080/api/brands').then(function (response) {
+        this.brands = response.data
+      }.bind(this))
+    },
+    setBrand(event) {
+      this.selectedBrand = event.target.options[event.target.options.selectedIndex].text;
+
+      axios.get('http://localhost:8080/api/models/' + this.selectedBrand).then(function (response) {
+        this.models = response.data
+      }.bind(this))
+    },
+    setModel(event) {
+      this.selectedModel = event.target.options[event.target.options.selectedIndex].text;
+    }
+  }
 }
 </script>
 

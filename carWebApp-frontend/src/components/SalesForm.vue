@@ -188,6 +188,7 @@ export default {
       advert.power = Number(advert.power);
       advert.price = Number(advert.price);
 
+
       axios.post('http://localhost:8080/api/adverts',{
         color: advert.color,
         vintage: advert.vintage,

@@ -8,9 +8,9 @@
     <p class="carTitle"> {{ CAR.title }}</p>
     <p class="carBrand">{{ CAR.brandName }}</p>
     <p class="carName">{{ CAR.modelName }}</p>
-    <p class="carKM"> {{ CAR.mileage }}</p>
+    <p class="carKM"> {{ CAR.mileage }} km</p>
     <div class="carPrice">
-      <span class="price"> {{ CAR.price }}</span>
+      <span class="price"> {{ CAR.price }} zł</span>
     </div>
   </selection>
 
