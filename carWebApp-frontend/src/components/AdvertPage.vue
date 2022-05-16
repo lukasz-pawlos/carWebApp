@@ -21,27 +21,27 @@
         <table>
           <tr>
             <td>COUNTRY</td>
-            <td>{{  advert.country  }}1111</td>
+            <td>{{  advert.country  }}</td>
           </tr>
           <tr>
             <td>COLOR</td>
-            <td>{{  advert.color  }}1111</td>
+            <td>{{  advert.color  }}</td>
           </tr>
           <tr>
             <td>CAR BODY</td>
-            <td>{{  advert.carBody  }}1111</td>
+            <td>{{  advert.carBody  }}</td>
           </tr>
           <tr>
             <td>VINTAGE</td>
-            <td>{{ advert.vintage }}1111</td>
+            <td>{{ advert.vintage }}</td>
           </tr>
           <tr>
             <td>MILEAGE</td>
-            <td>{{ advert.mileage }}1111</td>
+            <td>{{ advert.mileage }}</td>
           </tr>
           <tr>
             <td>POWER</td>
-            <td>{{ advert.power }}1111</td>
+            <td>{{ advert.power }}</td>
           </tr>
           <tr>
             <td>FUEL</td>
@@ -59,7 +59,7 @@
       </div>
 
       <selection class="menuOptions">
-        <button>
+        <button @click="$router.push('./buyAdvert')">
           Buy this car
         </button>
         <button @click="$router.push('./editAdvert')">

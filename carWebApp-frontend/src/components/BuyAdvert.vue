@@ -4,18 +4,26 @@
     <Menu/>
 
     <div class="formDiv">
-      <Form @submit="handleConfirmation" :validation-schema="schema">
+      <Form @submit="handlePurchase" :validation-schema="schema">
         <section class="sortOption">
-        <Field
-            name="secretKey"
-            class="formField"/>
-        <label>Secret key</label>
-          <ErrorMessage name="secretKey" class="errorMessage" />
+          <Field
+              name="email"
+              class="formField"/>
+          <label>Email</label>
+          <ErrorMessage name="email" class="errorMessage" />
+        </section>
+
+        <section class="sortOption">
+          <Field
+              name="phone"
+              class="formField"/>
+          <label>Phone</label>
+          <ErrorMessage name="phone" class="errorMessage" />
         </section>
 
         <div class="filterButtonDiv">
           <button>
-            Delete advert
+            Buy car
           </button>
         </div>
 
@@ -32,29 +40,40 @@ import Menu from "@/components/Menu";
 import * as yup from "yup";
 import axios from "axios";
 export default {
-  name: "ConfirmationPage",
+  name: "BuyAdvert",
   components: {
     TopBar,
     Menu,
+    ErrorMessage,
     Form,
-    Field,
-    ErrorMessage
+    Field
   },
   data() {
     const schema = yup.object().shape({
-      secretKey: yup
+      email: yup
           .string()
-          .required("Secret key is required!"),
+          .email("Email is invalid!")
+          .required("Email is required!"),
+      phone: yup
+          .string()
+          .matches(/^[0-9]{9}$/, "Good form is: XXXXXXXXX")
+          .required("Phone is required!"),
     });
     return {
       schema,
     };
   },
   methods: {
-    handleConfirmation(advert) {
-      console.log(advert.secretKey)
-      axios.delete('http://localhost:8080/api/adverts/' + advert.secretKey, {});
+    handlePurchase(advert) {
 
+      console.log(localStorage.getItem('secretKey'))
+
+
+      return axios.post('http://localhost:8080/api/adverts/' + localStorage.getItem('secretKey'), {
+        secretKey: localStorage.getItem('secretKey'),
+        buyerEmail: advert.buyerEmail,
+        buyerPhone: advert.buyerPhone,
+      })
     }
   },
 }

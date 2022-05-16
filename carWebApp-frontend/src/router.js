@@ -5,6 +5,7 @@ import CreateAdvert from "@/components/CreateAdvert";
 import AdvertPage from "@/components/AdvertPage";
 import ConfirmationPage from "@/components/ConfirmationPage";
 import EditAdvert from "@/components/EditAdvert";
+import BuyAdvert from "@/components/BuyAdvert";
 const routes = [
     {
         path: "/",
@@ -29,6 +30,10 @@ const routes = [
     {
         path: "/editAdvert",
         component: EditAdvert,
+    },
+    {
+        path: "/buyAdvert",
+        component: BuyAdvert,
     },
 
 ];
