@@ -13,40 +13,6 @@
       <span class="price"> {{ CAR.price }} zł</span>
     </div>
   </selection>
-
-  <selection class="carItem" @click="$router.push('./advert')">
-    <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
-    <p class="carTitle"> Title</p>
-    <p class="carBrand">Audi</p>
-    <p class="carName">RS6</p>
-    <p class="carKM"> 150 000km</p>
-    <div class="carPrice">
-      <span class="price"> 100 000 zl</span>
-    </div>
-  </selection>
-
-  <selection class="carItem" @click="$router.push('./advert')">
-    <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
-    <p class="carTitle"> Title</p>
-    <p class="carBrand">Audi</p>
-    <p class="carName">RS6</p>
-    <p class="carKM"> 150 000km</p>
-    <div class="carPrice">
-      <span class="price"> 100 000 zl</span>
-    </div>
-  </selection>
-
-  <selection class="carItem" @click="$router.push('./advert')">
-    <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
-    <p class="carTitle"> Title</p>
-    <p class="carBrand">Audi</p>
-    <p class="carName">RS6</p>
-    <p class="carKM"> 150 000km</p>
-    <div class="carPrice">
-      <span class="price"> 100 000 zl</span>
-    </div>
-  </selection>
-
 </div>
 </template>
 
@@ -68,8 +34,15 @@ export default {
     this.fetchAdverts();
   },
 
+  watch: {
+    URL: function (newVal, oldVal){
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    }
+  },
+
   methods: {
     fetchAdverts(){
+      console.log(URL)
       axios.get("http://localhost:8080/api/adverts").then(function (response){
         this.cars = response.data
       }.bind(this))

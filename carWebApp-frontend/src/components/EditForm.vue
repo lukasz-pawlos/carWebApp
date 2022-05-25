@@ -180,7 +180,7 @@ export default {
       advert.power = Number(advert.power);
       advert.price = Number(advert.price);
 
-      axios.put('http://localhost:8080/api/adverts' + advert.secretKey,{
+      axios.put('http://localhost:8080/api/adverts/' + advert.secretKey,{
         color: advert.color,
         vintage: advert.vintage,
         mileage: advert.mileage,

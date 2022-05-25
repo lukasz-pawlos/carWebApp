@@ -15,7 +15,7 @@ export default {
 
 <style>
 #app {
-  background-image: linear-gradient(black, yellow, white);
+  background-image: linear-gradient(gray, yellow, white);
 }
 
 </style>

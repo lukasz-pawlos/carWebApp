@@ -2,7 +2,7 @@
   <aside class="menu">
     <h1 class="menuTitle"> Filter by</h1>
 
-    <Form>
+    <Form @submit="handleForm" :validation-schema="schema">
       <div class="formSort">
         <section class="sortOption">
         <Field
@@ -104,7 +104,8 @@
               class="formFieldSelect"
               type="number"
               name="fuel"
-          as="select">
+              as="select"
+              @click="setFuel($event)">
           <option value="petrol">petrol</option>
           <option value="diesel">diesel</option>
           </Field>
@@ -124,6 +125,7 @@
 import {Form, Field} from "vee-validate";
 import * as yup from "yup";
 import axios from "axios";
+import Cars from "@/components/Cars";
 export default {
   name: "SortForm",
   components: {
@@ -132,7 +134,6 @@ export default {
   },
   data: function () {
     const schema = yup.object().shape({
-      // .required("Car brand is required!"),
       brand_name: yup
           .string(),
       mode_name: yup
@@ -142,12 +143,10 @@ export default {
       price_min: yup
           .number()
           .lessThan(10000000)
-          .required("Price is required!")
           .positive(),
       price_max: yup
           .number()
           .lessThan(10000000)
-          .required("Price is required!")
           .positive(),
       vintage_min: yup
           .number()
@@ -168,37 +167,58 @@ export default {
       power_max: yup.number()
           .positive(),
       fuel: yup
-          .string(),
+          .string()
     });
     return {
       schema,
       selectedBrand: '',
       selectedModel: '',
+      selectedFuel: '',
       brands: [],
       models: [],
     };
   },
-
+  mounted() {
+    this.getBrands();
+  },
   methods: {
     handleForm(advert){
-      advert.vintage_min = Number(advert.vintage_min);
-      advert.vintage_max = Number(advert.vintage_max);
-      advert.mileage_min = Number(advert.mileage_min);
-      advert.mileage_max = Number(advert.mileage_max);
-      advert.power_min = Number(advert.power_min);
-      advert.power_max = Number(advert.power_max);
-      advert.price_min = Number(advert.price_min);
-      advert.price_max = Number(advert.price_max);
+      advert.vintage_min = this.convertToNumber(advert.vintage_min);
+      advert.vintage_max = this.convertToNumber(advert.vintage_max);
+      advert.mileage_min = this.convertToNumber(advert.mileage_min);
+      advert.mileage_max = this.convertToNumber(advert.mileage_max);
+      advert.power_min = this.convertToNumber(advert.power_min);
+      advert.power_max = this.convertToNumber(advert.power_max);
+      advert.price_min = this.convertToNumber(advert.price_min);
+      advert.price_max = this.convertToNumber(advert.price_max);
+      advert.car_body = this.convertToString(advert.car_body);
 
-      let URL = `http://localhost:8080/api/adverts?brand_name=
-      ${advert.brand_name}$model_name=${advert.mode_name}&car_body=${advert.car_body}&price_min=${advert.price_min}
+      console.log(advert.power_min);
+      let URL = `http://localhost:8080/api/adverts?brand=
+      ${this.selectedBrand}$model=${this.selectedModel}&car_body=${advert.car_body}&price_min=${advert.price_min}
       &price_max=${advert.price_max}&vintage_min=${advert.vintage_min}&vintage_max=${advert.vintage_max}
       &mileage_min=${advert.mileage_min}&mileage_max=${advert.mileage_max}&power_min=${advert.power_min}
-      &power_max=${advert.power_max}&fuel=${advert.fuel}`;
-      console.log("dupsko");
-      console.log(URL);
-    },
+      &power_max=${advert.power_max}&fuel=${this.selectedFuel}`;
 
+
+      this.$emit('carURL', URL)
+
+      axios.get(URL).then(function (response) {
+        Cars.data().cars = response.data
+      }.bind(this))
+    },
+    convertToString(text) {
+      if(text) {
+        return text;
+      }
+      return '';
+    },
+    convertToNumber(number) {
+      if(number) {
+        return Number(number);
+      }
+      return '';
+    },
     getBrands() {
       axios.get('http://localhost:8080/api/brands').then(function (response) {
         this.brands = response.data
@@ -213,6 +233,9 @@ export default {
     },
     setModel(event) {
       this.selectedModel = event.target.options[event.target.options.selectedIndex].text;
+    },
+    setFuel(event) {
+      this.selectedFuel = event.target.options[event.target.options.selectedIndex].text;
     }
   }
 }

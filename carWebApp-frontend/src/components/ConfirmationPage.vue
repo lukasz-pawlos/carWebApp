@@ -31,6 +31,7 @@ import TopBar from "@/components/TopBar";
 import Menu from "@/components/Menu";
 import * as yup from "yup";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "ConfirmationPage",
   components: {
@@ -54,7 +55,7 @@ export default {
     handleConfirmation(advert) {
       console.log(advert.secretKey)
       axios.delete('http://localhost:8080/api/adverts/' + advert.secretKey, {});
-
+      router.push('./');
     }
   },
 }
