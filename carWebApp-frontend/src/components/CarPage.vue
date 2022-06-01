@@ -19,6 +19,79 @@
         </div>
       </selection>
 
+      <selection
+          class="carItem">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
+      <selection
+          class="carItem">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
+      <selection
+          class="carItem">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
+      <selection
+          class="carItem">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
+      <selection
+          class="carItem">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
+      <selection
+          class="carItem"
+          @click="$router.push('./advert')">
+        <img src="../../public/auto-icon.jpg" alt="auto" class="carPhoto">
+        <p class="carTitle"> Super hyper audi </p>
+        <p class="carBrand">Audi</p>
+        <p class="carName">RS6</p>
+        <p class="carKM"> 500 km</p>
+        <div class="carPrice">
+          <span class="price"> 500 000 zł</span>
+        </div>
+      </selection>
+
     </div>
   </div>
 </template>
@@ -82,5 +155,52 @@ export default {
 </script>
 
 <style scoped>
+.cars{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 30px;
+}
+.carItem{
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
 
+
+.carItem:hover{
+  box-shadow: rgba(50, 50, 93, 0.25) 0 13px 27px -5px,
+  rgba(0, 0, 0, 0.3) 0 8px 16px -8px;
+}
+
+.carPhoto{
+  width: 20%;
+}
+.carTitle{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.carBrand{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.carName{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.carPrice{
+  font-weight: bold;
+  font-size: 30px;
+}
 </style>

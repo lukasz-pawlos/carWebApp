@@ -14,8 +14,10 @@ export default {
 </script>
 
 <style>
-#app {
-  background-image: linear-gradient(gray, yellow, white);
-}
+/*#app {*/
+/*  background-image: linear-gradient(gray, yellow, white);*/
+/*  background-repeat: no-repeat;*/
+/*  background-attachment: fixed;*/
+/*}*/
 
 </style>

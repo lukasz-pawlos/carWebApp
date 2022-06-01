@@ -194,11 +194,11 @@ export default {
       advert.car_body = this.convertToString(advert.car_body);
 
       console.log(advert.power_min);
-      let URL = `http://localhost:8080/api/adverts?brand=
-      ${this.selectedBrand}$model=${this.selectedModel}&car_body=${advert.car_body}&price_min=${advert.price_min}
-      &price_max=${advert.price_max}&vintage_min=${advert.vintage_min}&vintage_max=${advert.vintage_max}
-      &mileage_min=${advert.mileage_min}&mileage_max=${advert.mileage_max}&power_min=${advert.power_min}
-      &power_max=${advert.power_max}&fuel=${this.selectedFuel}`;
+      let URL = `http://localhost:8080/api/adverts` +
+      `?brand=${this.selectedBrand}&model=${this.selectedModel}&car_body=${advert.car_body}` +
+      `&price_min=${advert.price_min}&price_max=${advert.price_max}&vintage_min=${advert.vintage_min}` +
+      `&vintage_max=${advert.vintage_max}&mileage_min=${advert.mileage_min}&mileage_max=${advert.mileage_max}` +
+      `&power_min=${advert.power_min}&power_max=${advert.power_max}&fuel=${this.selectedFuel}`;
 
 
       this.$emit('carURL', URL)

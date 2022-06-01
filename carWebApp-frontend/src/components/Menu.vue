@@ -4,7 +4,6 @@
    <section class="menuOptions">
      <button @click="$router.push('./createAdvert')">Sell</button>
      <button @click="$router.push('./cars')">Buy</button>
-     <button @click="$router.push('./cars')">Delete advert</button>
    </section>
  </aside>
 </template>

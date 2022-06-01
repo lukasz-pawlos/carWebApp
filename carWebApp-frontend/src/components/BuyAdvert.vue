@@ -39,6 +39,7 @@ import TopBar from "@/components/TopBar";
 import Menu from "@/components/Menu";
 import * as yup from "yup";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "BuyAdvert",
   components: {
@@ -68,11 +69,11 @@ export default {
 
       console.log(localStorage.getItem('secretKey'))
 
-
+      router.push('./');
       return axios.post('http://localhost:8080/api/adverts/' + localStorage.getItem('secretKey'), {
         secretKey: localStorage.getItem('secretKey'),
-        buyerEmail: advert.buyerEmail,
-        buyerPhone: advert.buyerPhone,
+        buyerEmail: advert.email,
+        buyerPhone: advert.phone,
       })
     }
   },
